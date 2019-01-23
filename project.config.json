@@ -1,0 +1,43 @@
+{
+	"description": "A WePY project",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": false,
+		"minified": false,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"appid": "wx1039fdc244bbf08b",
+	"projectname": "myproject",
+	"miniprogramRoot": "dist/",
+	"libVersion": "2.5.0",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "node环境",
+					"pathName": "pages/hightSchool",
+					"query": "process.env.NODE_ENV=development"
+				}
+			]
+		}
+	}
+}

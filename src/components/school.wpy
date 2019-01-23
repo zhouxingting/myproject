@@ -1,0 +1,254 @@
+<style>
+  page{
+    background-color: #F8F8F8;
+    height: 100%;
+    font-size: 32rpx;
+    line-height: 1.6;
+  }
+  .topFixView {
+    position: fixed;
+    z-index: 99;
+    width:100%;
+  }
+  .seatchInput {
+    display:flex;
+    position: relative;
+  }
+  .searchImg {
+    position:absolute;
+    top:5px;
+    left:5px;
+  }
+  .search {
+    border:1px solid hsl(0, 0%, 80%);
+    border-radius:5px;
+    padding:3px 0px 3px 30px;
+    font-size:14px;
+    width:65%;
+  }
+  .submit {
+    background:#FD7B2C;
+    color:#fff;
+    line-height:30px;
+    font-size:14px;
+    margin-left:10px;
+  }
+  .topSearch {
+    padding: 10px 0px 10px 10px;
+    background: #fff;
+  }
+  .navigator-arrow {
+    padding-right:26rpx;
+    position:relative;
+  }
+  .fontSize {
+    font-size: 40rpx;
+    vertical-align: middle;
+  }
+  .viewText {
+    text-align: center;
+    font-size: 30rpx;
+    width: 20%;
+    margin: 20rpx 0;
+    border-right: 1px solid #DEDFE0;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .viewText:last-child {
+    border-right: 0px;
+  }
+  .selectCnt {
+    display:flex;
+    justify-content:center;
+    border-top: 1px solid #DEDFE0;
+    border-bottom: 1px solid #DEDFE0;
+    background: #fff;
+  }
+  .windowSelect {
+    position: relative;
+  }
+  .windowMaskCnt {
+      position: fixed;
+      top: 30rpx;
+      bottom: 0px;
+      width: 100%;
+      height: 100%;
+      z-index: 1006;
+      color: #888;
+      margin-top: 160rpx
+  }
+  .mask {
+      position: absolute;
+      top: 0px;
+      bottom: 0px;
+      width: 100%;
+      font-size: 16px;
+      background-color: rgba(0, 0, 0, 0.3);
+  }
+  .contentCnt {
+      position: absolute;
+      top: 0px;
+      /* width: 100%; */
+      font-size: 16px;
+      border-top: 1px solid rgb(242, 242, 242);
+      background: #fff;
+      transform-origin: 0 0;
+      padding: 10rpx;
+      left:0;
+      right:0px;
+  }
+  .disnone {
+    display: none;
+  }
+  @keyframes cityDropdown {
+      0% {
+          transform: scaleY(0);
+          opacity: 0;
+      }
+      100% {
+          transform: scaleY(1);
+          opacity: 1;
+      }
+  }
+  .cityDropdown {
+      -webkit-animation-name: cityDropdown;
+      animation-name: cityDropdown;
+  }
+  .cityAnimated {
+      -webkit-animation-duration: 200ms;
+      animation-duration: 200ms;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      /* animation-timing-function:cubic-bezier(.645,.045,.355,1); */
+  }
+  .infoBtn button{
+    margin:1%;
+    width:30%;
+    line-height:2;
+    white-space: nowrap;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 28rpx;
+  }
+  .infoBtn {
+    max-height:300px;
+    overflow:auto;
+  }
+  .submitBtn button {
+    margin-top: 20rpx;
+    width: 100%;
+    line-height:2.5;
+    font-size:32rpx;
+  }
+  button.active {
+    background: #FD7B2C;
+    color: #fff;
+  }
+  .schoolImg image {
+    width: 150rpx;
+    height: 150rpx;
+    border-radius: 50%;
+  }
+  .collegeLine {
+    display: flex;
+    background: #fff;
+    padding: 20rpx 0 0 10rpx;
+    margin-bottom: 30rpx;
+  }
+  .colorRed {
+    color: #FD7B2C;
+  }
+  .schoolView:first-child {
+    width: 20%;
+    margin-right: 5%;
+  }
+  .schoolView:last-child {
+    width: 40%;
+  }
+  .schoolView:nth-child(2) {
+    width: 35%;
+  }
+  .schoolText {
+    background: #FFF3F3;
+    color: #FD7B2C;
+    border-radius: 3rpx;
+    font-size: 34rpx;
+    margin-right: 3rpx;
+    padding: 3rpx 5rpx;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+  }
+  .port {
+    font-size: 34rpx;
+    color: #9D9D9D;
+  }
+  .schoolView view {
+    margin-bottom: 20rpx;
+  }
+  .schoolView button {
+    background:#fff;
+    color:#FF6666;
+    line-height:30px;
+    font-size:14px;
+    border: 1px solid #FF6666;
+    margin-top:15%;
+    padding: 0px;
+    width:80%;
+  }
+  .collegeNum {
+    margin: 10rpx 30rpx 10rpx 30rpx;
+    font-size: 30rpx;
+  }
+  .collegeInfoCnt {
+    position: absolute;
+    top:220rpx;
+    width: 100%;
+    overflow: scroll;
+  }
+  .itemView {
+    display: flex
+  }
+</style>
+<template>
+  <navigator url="{{'../pages/detail?school_info_id='+schoolItem.school_info_id}}" class="navigator">
+    <view class='collegeLine'>
+      <view class='schoolImg schoolView'><image mode="aspectFit" src="{{ENDPOINT_IMAGEURL+schoolItem.school_icon_url}}"></image></view>
+      <view class='schoolView'>
+        <view>{{schoolItem.name}}</view>
+        <view class='itemView'>
+        <repeat for="{{m1.joinArray(schoolItem.point_text)}}" key="index" index="index" item="itemText" >
+          <text class='schoolText'>{{itemText}}</text>
+        </repeat>
+        </view>
+        <view class='port'>综合排名：{{schoolItem.rank_affect}}</view>
+      </view>
+      <view class='schoolView'>
+        <button >历年录取数据</button>
+      </view>
+    </view>
+  </navigator>
+</template>
+<script>
+  import wepy from 'wepy'
+  import { ENDPOINT_IMAGEURL } from '@/services/api'
+  import mywxs from '../utils/util.wxs'
+
+  export default class School extends wepy.component {
+    props = {
+      schoolItem: {}
+    }
+    data = {
+      ENDPOINT_IMAGEURL: ENDPOINT_IMAGEURL
+    }
+    wxs = {
+      m1: mywxs
+    }
+    onLoad () {
+      console.log('item', this)
+    }
+  }
+</script>

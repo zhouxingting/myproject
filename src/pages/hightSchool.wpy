@@ -1,0 +1,65 @@
+<style>
+  .hcontainer {
+    color: black;
+    text-align: left;
+    height:100%;
+  }
+  .collegeNum {
+    height: 30px;
+    margin:10rpx 30rpx 10rpx 30rpx;
+    font-size:30rpx;
+    text-align: left;
+    width:100%;
+  }
+  .colorRed {
+    color: #FD7B2C;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+</style>
+<template>
+  <view class="hcontainer">
+    <view class='collegeNum'><text>共<text class='colorRed'>{{schoolCount}}</text>所学校</text></view>
+    <loading :loading.sync="load">
+      <repeat for="{{schoolList}}" key="index" index="index" item="item">
+        <school :schoolItem="item" slot="content"></school>
+      </repeat>
+    </loading>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import School from '@/components/school'
+  import Loading from '@/components/loading'
+  import { asyncSchoolList } from '../store/actions/school'
+
+  @connect({
+    schoolList (state) {
+      return state.school.schoolList
+    },
+    load (state) {
+      return state.school.load
+    }
+  }, {
+    asyncSchoolList
+  })
+
+  export default class HightSchool extends wepy.page {
+    components = {
+      school: School,
+      loading: Loading
+    }
+    data = {
+      load: true
+    }
+    computed = {
+      schoolCount () {
+        return this.schoolList && this.schoolList.length
+      }
+    }
+    onLoad() {
+      this.methods.asyncSchoolList({})
+    }
+  }
+</script>

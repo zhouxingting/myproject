@@ -1,0 +1,26 @@
+.loadingContent {
+    width:100%;
+    height:calc(100% - 30px);
+}
+.loadingCnt {
+    display:flex;
+    width:100%;
+    height:100%;
+    align-items:center;
+    justify-content:center;    
+}
+@keyframes myfirst {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingImg {
+    width: 200rpx;
+    height: 200rpx;
+    animation: myfirst linear 2s infinite;
+}

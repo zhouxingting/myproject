@@ -1,0 +1,6 @@
+
+module.exports = {
+  joinArray: function (data) {
+    return data.split(',')
+  }
+};
