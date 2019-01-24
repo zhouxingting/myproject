@@ -40,6 +40,7 @@ export default function request(url, options) {
       url: url,
       method: options.method || 'GET',
       data: options.data || {},
+      Authorization: 'AuthorizationToken',
       header: {
         'content-type': 'application/json' // 默认值
       },
