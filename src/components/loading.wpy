@@ -1,0 +1,28 @@
+<style lang="less">
+  @import '../animate/animate.less';
+</style>
+<template>
+  <view class="loadingContent">
+    <block wx:if="{{loading}}">
+      <view class="loadingCnt">
+        <image mode="aspectFit" class="loadingImg" src="{{loadingimg}}"></image>
+      </view>
+    </block>
+    <slot name="content"><slot>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class Loading extends wepy.component {
+    props = {
+      loading: {
+        type: Boolean,
+        default: true
+      }
+    }
+    data = {
+      loadingimg: '../images/loading.png'
+    }
+  }
+</script>
